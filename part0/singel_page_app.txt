@@ -1,0 +1,24 @@
+https://www.websequencediagrams.com/
+
+title 0.5: Single page app
+
+browser->server: HTTP GET /spa
+server-->browser: spa.html
+
+browser->server: HTTP GET /main.css
+server-->browser: main.css
+
+browser->server: HTTP GET /spa.js
+server-->browser: spa.js
+
+note over browser:
+browser starts executing js-code
+that requests data.json
+end note
+
+browser->server: HTTP GET /data.json
+server-->browser: data.json
+
+note over browser:
+data.json is shown on the page
+end note

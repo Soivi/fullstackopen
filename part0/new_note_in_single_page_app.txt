@@ -1,0 +1,10 @@
+https://www.websequencediagrams.com/
+
+title 0.6: New note
+
+browser->server: HTTP POST /new_note_spa
+server-->browser: HTTP status 201 created
+
+note over browser:
+Browser does not need to request anything else
+end note
