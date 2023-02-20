@@ -63,6 +63,27 @@ test('a new blog without likes', async () => {
   expect(blogsAtEnd[blogsAtEnd.length-1].likes).toBe(0)
 })
 
+test('a new blog without title or url', async () => {
+  let newBlogNoUrl = JSON.parse(JSON.stringify(helper.newBlog))
+  delete newBlogNoUrl.url
+
+  let newBlogNoTitle = JSON.parse(JSON.stringify(helper.newBlog))
+  delete newBlogNoTitle.title
+
+  await api
+    .post('/api/blogs')
+    .send(newBlogNoUrl)
+    .expect(400)
+
+  await api
+    .post('/api/blogs')
+    .send(newBlogNoTitle)
+    .expect(400)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
